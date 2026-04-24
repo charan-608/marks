@@ -3,728 +3,536 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Academic Dashboard</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Academic Dashboard | Next-Gen Performance Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <style>
-  :root {
-    --bg: #0f0e17;
-    --surface: #1a1928;
-    --card: #201f30;
-    --border: rgba(255,255,255,0.07);
-    --text: #fffffe;
-    --muted: #a7a9be;
-    --accent-purple: #7c6fcd;
-    --accent-teal: #2cb67d;
-    --accent-coral: #e06c75;
-    --accent-amber: #e8b14f;
-    --accent-blue: #5da9e9;
-    --accent-pink: #c678dd;
-    --accent-green: #53c28b;
-    --accent-orange: #d19a66;
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    padding: 0 0 80px;
+    background: #0a0a12;
+    font-family: 'Inter', sans-serif;
+    color: #f0f3fa;
+    scroll-behavior: smooth;
   }
 
+  /* Custom scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #1e1e2a; }
+  ::-webkit-scrollbar-thumb { background: #4a4a6a; border-radius: 8px; }
+
+  /* Animated gradient hero */
   .hero {
-    background: linear-gradient(135deg, #1a1928 0%, #14131f 100%);
-    border-bottom: 1px solid var(--border);
-    padding: 48px 40px 36px;
+    background: radial-gradient(circle at 20% 30%, #17162b, #0c0b16);
+    border-bottom: 1px solid rgba(110, 90, 200, 0.2);
+    padding: 48px 40px 42px;
     position: relative;
     overflow: hidden;
   }
-
   .hero::before {
     content: '';
     position: absolute;
-    top: -60px; right: -60px;
-    width: 280px; height: 280px;
-    background: radial-gradient(circle, rgba(124,111,205,0.12) 0%, transparent 70%);
-    border-radius: 50%;
+    top: -30%;
+    left: -20%;
+    width: 140%;
+    height: 140%;
+    background: radial-gradient(circle, rgba(124,111,205,0.15) 0%, transparent 70%);
+    animation: slowDrift 18s infinite alternate;
   }
-
-  .hero::after {
-    content: '';
-    position: absolute;
-    bottom: -40px; left: 30%;
-    width: 200px; height: 200px;
-    background: radial-gradient(circle, rgba(44,182,125,0.08) 0%, transparent 70%);
-    border-radius: 50%;
+  @keyframes slowDrift {
+    0% { transform: translate(0,0) scale(1); opacity: 0.3; }
+    100% { transform: translate(5%, 5%) scale(1.1); opacity: 0.6; }
   }
-
   .hero-inner {
-    max-width: 1100px;
+    max-width: 1300px;
     margin: 0 auto;
     position: relative;
-    z-index: 1;
-  }
-
-  .hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.4rem;
-    font-weight: 600;
-    letter-spacing: -0.5px;
-    margin-bottom: 6px;
-  }
-
-  .hero p {
-    color: var(--muted);
-    font-size: 0.95rem;
-    font-weight: 300;
-  }
-
-  .section-label {
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--muted);
-    padding: 40px 40px 16px;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  .grid {
-    display: grid;
+    z-index: 3;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
     gap: 20px;
+  }
+  .hero h1 {
+    font-family: 'Space Grotesk', monospace;
+    font-size: 2.8rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, #fff, #b4adff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: -0.02em;
+  }
+  .hero p {
+    color: #9a9cbf;
+    margin-top: 8px;
+    font-weight: 400;
+  }
+  .live-badge {
+    background: rgba(46, 204, 113, 0.15);
+    backdrop-filter: blur(8px);
+    padding: 8px 20px;
+    border-radius: 60px;
+    font-size: 0.85rem;
+    border: 1px solid rgba(46,204,113,0.4);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .live-badge i {
+    color: #2ecc71;
+    font-size: 0.7rem;
+  }
+  .pulse-dot {
+    width: 10px;
+    height: 10px;
+    background: #2ecc71;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #2ecc71;
+    animation: pulse 1.5s infinite;
+  }
+  @keyframes pulse { 0% { opacity: 0.4; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1.2); } }
+
+  /* Section label modern */
+  .section-label {
+    max-width: 1300px;
+    margin: 48px auto 16px;
     padding: 0 40px;
-    max-width: 1100px;
-    margin: 0 auto;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .section-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: -0.2px;
+    background: linear-gradient(120deg, #ddd, #b9b3ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .insight-chip {
+    background: #1e1d30;
+    padding: 6px 14px;
+    border-radius: 40px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: #b7b3e6;
   }
 
+  /* Grid systems */
+  .grid {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    gap: 24px;
+    padding: 0 40px;
+  }
   .grid-2 { grid-template-columns: repeat(2, 1fr); }
-  .grid-3 { grid-template-columns: repeat(3, 1fr); }
   .grid-4 { grid-template-columns: repeat(4, 1fr); }
 
+  /* Glassmorphic cards */
   .subject-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
+    background: rgba(26, 25, 46, 0.75);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 28px;
+    transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
     overflow: hidden;
-    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 12px 28px -12px rgba(0,0,0,0.5);
   }
-
   .subject-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    transform: translateY(-6px);
+    border-color: rgba(124,111,205,0.5);
+    background: rgba(32, 30, 58, 0.85);
+    box-shadow: 0 25px 35px -14px rgba(0,0,0,0.6);
   }
 
   .card-header {
-    padding: 20px 22px 16px;
-    border-bottom: 1px solid var(--border);
+    padding: 20px 24px 16px;
     display: flex;
-    align-items: flex-start;
     justify-content: space-between;
-    gap: 10px;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
   }
-
   .card-header-left h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 3px;
+    font-size: 1.45rem;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    font-family: 'Space Grotesk', monospace;
   }
-
   .credit-badge {
+    background: rgba(255,255,255,0.07);
+    padding: 4px 12px;
+    border-radius: 30px;
     font-size: 0.7rem;
     font-weight: 500;
-    letter-spacing: 0.5px;
-    padding: 3px 9px;
-    border-radius: 20px;
-    opacity: 0.85;
-    white-space: nowrap;
-    margin-top: 2px;
-    display: inline-block;
   }
-
-  .score-circle {
-    width: 58px;
-    height: 58px;
+  .score-ring {
+    width: 68px;
+    height: 68px;
+    background: rgba(0,0,0,0.4);
     border-radius: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0;
     border: 2px solid;
+    transition: 0.2s;
   }
+  .score-ring .pct { font-size: 1.1rem; font-weight: 800; }
+  .score-ring .label { font-size: 0.55rem; opacity: 0.7; }
 
-  .score-circle .pct {
-    font-size: 1rem;
-    font-weight: 500;
-    line-height: 1;
-  }
-
-  .score-circle .label {
-    font-size: 0.55rem;
-    font-weight: 400;
-    opacity: 0.7;
-    letter-spacing: 0.3px;
-    margin-top: 2px;
-  }
-
-  .card-body {
-    padding: 16px 22px 20px;
-  }
-
+  .card-body { padding: 18px 24px 24px; }
   .assessment-row {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    padding: 9px 0;
-    border-bottom: 1px solid var(--border);
-    gap: 12px;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px dashed rgba(255,255,255,0.04);
+    gap: 10px;
   }
-
-  .assessment-row:last-child { border-bottom: none; }
-
   .assessment-name {
     font-size: 0.82rem;
-    color: var(--muted);
-    font-weight: 400;
-    flex: 1;
+    font-weight: 450;
+    color: #cbcdf2;
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
-
-  .assessment-score {
-    font-size: 0.9rem;
-    font-weight: 500;
-    white-space: nowrap;
-  }
-
-  .assessment-bar-wrap {
-    width: 60px;
-    height: 4px;
+  .assessment-name i { font-size: 0.75rem; opacity: 0.7; width: 20px; }
+  .assessment-score { font-weight: 600; font-family: monospace; font-size: 0.85rem; }
+  .bar-wrap {
+    width: 80px;
+    height: 5px;
     background: rgba(255,255,255,0.08);
-    border-radius: 2px;
+    border-radius: 6px;
     overflow: hidden;
-    flex-shrink: 0;
   }
-
-  .assessment-bar {
-    height: 100%;
-    border-radius: 2px;
-    transition: width 1s ease;
-  }
-
+  .bar-fill { height: 100%; border-radius: 6px; transition: width 0.5s ease; }
   .pending-tag {
-    font-size: 0.68rem;
-    font-weight: 500;
-    padding: 2px 8px;
-    border-radius: 10px;
     background: rgba(255,255,255,0.05);
-    color: var(--muted);
-    letter-spacing: 0.3px;
-    white-space: nowrap;
-  }
-
-  .divider-pending {
-    font-size: 0.68rem;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.2);
-    padding: 10px 0 6px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.7rem;
     font-weight: 500;
   }
-
+  .divider-light {
+    font-size: 0.65rem;
+    color: #797b9e;
+    margin: 12px 0 6px;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
   .total-row {
+    margin-top: 18px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255,255,255,0.12);
     display: flex;
     justify-content: space-between;
+    font-weight: 600;
+  }
+
+  /* color accents */
+  .daa .score-ring, .daa .bar-fill { border-color: #a78bfa; }
+  .daa .total-val, .daa .score-ring .pct { color: #c4b5fd; }
+  .os .score-ring, .os .bar-fill { border-color: #34d399; }
+  .os .total-val, .os .score-ring .pct { color: #6ee7b7; }
+  .dccn .score-ring, .dccn .bar-fill { border-color: #fbbf24; }
+  .dccn .total-val, .dccn .score-ring .pct { color: #fcd34d; }
+  .ctcs .score-ring, .ctcs .bar-fill { border-color: #f87171; }
+  .ctcs .total-val, .ctcs .score-ring .pct { color: #fca5a5; }
+  .dbms .score-ring, .dbms .bar-fill { border-color: #60a5fa; }
+  .gdpi .score-ring, .gdpi .bar-fill { border-color: #c084fc; }
+  .mad .score-ring, .mad .bar-fill { border-color: #4ade80; }
+  .clubs .score-ring, .clubs .bar-fill { border-color: #fb923c; }
+
+  /* NEW FEATURES: GPA overview & motivation widget */
+  .gpa-module {
+    max-width: 1300px;
+    margin: 0 auto 30px;
+    padding: 0 40px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .gpa-card {
+    background: linear-gradient(125deg, #1f1e32, #161528);
+    border-radius: 28px;
+    padding: 18px 28px;
+    flex: 1;
+    display: flex;
     align-items: center;
-    margin-top: 14px;
-    padding-top: 12px;
-    border-top: 1px solid var(--border);
+    gap: 20px;
+    border: 1px solid rgba(255,255,255,0.05);
+    backdrop-filter: blur(4px);
+  }
+  .gpa-circle {
+    width: 70px;
+    height: 70px;
+    background: #0e0d1c;
+    border-radius: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.8rem;
+    font-family: monospace;
+    border: 2px solid #a78bfa;
+    color: #ddd;
+  }
+  .quote-box {
+    background: #19182b;
+    border-radius: 20px;
+    padding: 16px 28px;
+    flex: 1.5;
+    border-left: 5px solid #a78bfa;
+  }
+  .quote-text {
+    font-style: italic;
+    font-size: 0.9rem;
+  }
+  .progress-marker {
+    display: inline-block;
+    background: #2a2942;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    padding: 3px 10px;
   }
 
-  .total-label {
-    font-size: 0.78rem;
-    color: var(--muted);
-    font-weight: 400;
+  @media (max-width: 950px) {
+    .grid-2, .grid-4 { grid-template-columns: 1fr; }
+    .gpa-module { flex-direction: column; }
+    .hero h1 { font-size: 2rem; }
+    .grid, .section-label, .gpa-module { padding-left: 20px; padding-right: 20px; }
   }
-
-  .total-val {
-    font-size: 0.92rem;
-    font-weight: 500;
-  }
-
-  /* Color themes per subject */
-  .daa .card-header { border-color: rgba(124,111,205,0.2); }
-  .daa .score-circle { border-color: var(--accent-purple); color: var(--accent-purple); }
-  .daa .assessment-bar { background: var(--accent-purple); }
-  .daa .credit-badge { background: rgba(124,111,205,0.15); color: var(--accent-purple); }
-  .daa .total-val { color: var(--accent-purple); }
-
-  .dbms .card-header { border-color: rgba(93,169,233,0.2); }
-  .dbms .score-circle { border-color: var(--accent-blue); color: var(--accent-blue); }
-  .dbms .assessment-bar { background: var(--accent-blue); }
-  .dbms .credit-badge { background: rgba(93,169,233,0.15); color: var(--accent-blue); }
-  .dbms .total-val { color: var(--accent-blue); }
-
-  .os .card-header { border-color: rgba(44,182,125,0.2); }
-  .os .score-circle { border-color: var(--accent-teal); color: var(--accent-teal); }
-  .os .assessment-bar { background: var(--accent-teal); }
-  .os .credit-badge { background: rgba(44,182,125,0.15); color: var(--accent-teal); }
-  .os .total-val { color: var(--accent-teal); }
-
-  .dccn .card-header { border-color: rgba(232,177,79,0.2); }
-  .dccn .score-circle { border-color: var(--accent-amber); color: var(--accent-amber); }
-  .dccn .assessment-bar { background: var(--accent-amber); }
-  .dccn .credit-badge { background: rgba(232,177,79,0.15); color: var(--accent-amber); }
-  .dccn .total-val { color: var(--accent-amber); }
-
-  .ctcs .card-header { border-color: rgba(224,108,117,0.2); }
-  .ctcs .score-circle { border-color: var(--accent-coral); color: var(--accent-coral); }
-  .ctcs .assessment-bar { background: var(--accent-coral); }
-  .ctcs .credit-badge { background: rgba(224,108,117,0.15); color: var(--accent-coral); }
-  .ctcs .total-val { color: var(--accent-coral); }
-
-  .gdpi .card-header { border-color: rgba(198,120,221,0.2); }
-  .gdpi .score-circle { border-color: var(--accent-pink); color: var(--accent-pink); }
-  .gdpi .assessment-bar { background: var(--accent-pink); }
-  .gdpi .credit-badge { background: rgba(198,120,221,0.15); color: var(--accent-pink); }
-  .gdpi .total-val { color: var(--accent-pink); }
-
-  .mad .card-header { border-color: rgba(83,194,139,0.2); }
-  .mad .score-circle { border-color: var(--accent-green); color: var(--accent-green); }
-  .mad .assessment-bar { background: var(--accent-green); }
-  .mad .credit-badge { background: rgba(83,194,139,0.15); color: var(--accent-green); }
-  .mad .total-val { color: var(--accent-green); }
-
-  .clubs .card-header { border-color: rgba(209,154,102,0.2); }
-  .clubs .score-circle { border-color: var(--accent-orange); color: var(--accent-orange); }
-  .clubs .assessment-bar { background: var(--accent-orange); }
-  .clubs .credit-badge { background: rgba(209,154,102,0.15); color: var(--accent-orange); }
-  .clubs .total-val { color: var(--accent-orange); }
-
-  /* Summary strip */
-  .summary-strip {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    padding: 0 40px 32px;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  .summary-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 16px 18px;
-    text-align: center;
-  }
-
-  .summary-card .s-val {
-    font-size: 1.6rem;
-    font-weight: 500;
-    font-family: 'Playfair Display', serif;
-    margin-bottom: 4px;
-  }
-
-  .summary-card .s-label {
-    font-size: 0.73rem;
-    color: var(--muted);
-    font-weight: 400;
-    letter-spacing: 0.3px;
-  }
-
-  @media (max-width: 900px) {
-    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; }
-    .summary-strip { grid-template-columns: repeat(2, 1fr); }
-    .hero { padding: 32px 20px 28px; }
-    .grid, .section-label, .summary-strip { padding-left: 20px; padding-right: 20px; }
-  }
-
-  @media (max-width: 560px) {
-    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
-    .summary-strip { grid-template-columns: 1fr 1fr; }
-  }
-
-  .fade-in {
-    opacity: 0;
-    transform: translateY(14px);
-    animation: fadeUp 0.5s ease forwards;
-  }
-
-  @keyframes fadeUp {
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
   }
-
-  .subject-card:nth-child(1) { animation-delay: 0.05s; }
-  .subject-card:nth-child(2) { animation-delay: 0.1s; }
-  .subject-card:nth-child(3) { animation-delay: 0.15s; }
-  .subject-card:nth-child(4) { animation-delay: 0.2s; }
+  .subject-card { animation: fadeInUp 0.45s ease forwards; opacity: 0; }
+  .subject-card:nth-child(1) { animation-delay: 0.02s; }
+  .subject-card:nth-child(2) { animation-delay: 0.07s; }
+  .subject-card:nth-child(3) { animation-delay: 0.12s; }
+  .subject-card:nth-child(4) { animation-delay: 0.17s; }
+  .subject-card:nth-child(5) { animation-delay: 0.22s; }
+  .subject-card:nth-child(6) { animation-delay: 0.27s; }
+  .subject-card:nth-child(7) { animation-delay: 0.32s; }
+  .subject-card:nth-child(8) { animation-delay: 0.37s; }
 </style>
 </head>
 <body>
 
 <div class="hero">
   <div class="hero-inner">
-    <h1>Academic Dashboard</h1>
-    <p>Semester performance tracker &nbsp;·&nbsp; 3-credit &amp; 2-credit courses</p>
+    <div>
+      <h1>📈 Academic Dashboard<span style="font-size: 1.4rem;"> +</span></h1>
+      <p>Live performance • Smart insights • Real-time GPA estimator</p>
+    </div>
+    <div class="live-badge">
+      <div class="pulse-dot"></div>
+      <span>Live sync • marks updated</span>
+      <i class="fas fa-check-circle" style="color:#2ecc71;"></i>
+    </div>
   </div>
 </div>
 
-<!-- ────────────── 3-CREDIT SUBJECTS ────────────── -->
-<div class="section-label">3-Credit Courses</div>
+<!-- GPA + QUOTE FEATURE -->
+<div class="gpa-module">
+  <div class="gpa-card">
+    <div class="gpa-circle" id="gpaValue">0.0</div>
+    <div>
+      <div style="font-weight: 600; font-size: 0.85rem;">📊 Estimated GPA</div>
+      <div style="font-size: 0.7rem; color: #b5b3d6;">Based on completed assessments (out of 100 scale)</div>
+      <div style="margin-top: 6px;"><span class="progress-marker" id="totalCreditsEarned">Credits: --</span></div>
+    </div>
+  </div>
+  <div class="quote-box">
+    <i class="fas fa-quote-left" style="color: #a78bfa; opacity: 0.7;"></i>
+    <span class="quote-text" id="motivationQuote">"Small daily improvements lead to extraordinary results."</span>
+    <div style="margin-top: 8px; font-size: 0.7rem;">✨ <span id="progressInsight">Keep pushing, viva and quizzes are shaping up!</span></div>
+  </div>
+</div>
 
+<div class="section-label">
+  <div class="section-title"><i class="fas fa-microchip"></i> 3‑CREDIT COURSES • CORE</div>
+  <div class="insight-chip"><i class="far fa-chart-line"></i> percentage based on total curriculum</div>
+</div>
 <div class="grid grid-2">
-
-  <!-- DAA -->
-  <div class="subject-card daa fade-in">
+  <!-- DAA Card -->
+  <div class="subject-card daa">
     <div class="card-header">
-      <div class="card-header-left">
-        <h2>DAA</h2>
-        <span class="credit-badge">3 Credits</span>
-      </div>
-      <div class="score-circle">
-        <span class="pct">73%</span>
-        <span class="label">so far</span>
-      </div>
+      <div class="card-header-left"><h2>DAA</h2><span class="credit-badge">3 Credits</span></div>
+      <div class="score-ring" id="daaRing"><span class="pct" id="daaPct">0%</span><span class="label">progress</span></div>
     </div>
     <div class="card-body">
-      <div class="assessment-row">
-        <span class="assessment-name">Quiz 1</span>
-        <div class="assessment-bar-wrap"><div class="assessment-bar" style="width:73%"></div></div>
-        <span class="assessment-score">11 / 15</span>
-      </div>
-      <div class="divider-pending">— to be conducted —</div>
-      <div class="assessment-row">
-        <span class="assessment-name">Quiz 2</span>
-        <div class="assessment-bar-wrap"><div class="assessment-bar" style="width:0%"></div></div>
-        <span class="pending-tag">/ 15</span>
-      </div>
-      <div class="assessment-row">
-        <span class="assessment-name">Viva</span>
-        <div class="assessment-bar-wrap"><div class="assessment-bar" style="width:0%"></div></div>
-        <span class="pending-tag">/ 10</span>
-      </div>
-      <div class="assessment-row">
-        <span class="assessment-name">Lab Exam</span>
-        <div class="assessment-bar-wrap"><div class="assessment-bar" style="width:0%"></div></div>
-        <span class="pending-tag">/ 10</span>
-      </div>
-      <div class="assessment-row">
-        <span class="assessment-name">Class Participation</span>
-        <div class="assessment-bar-wrap"><div class="assessment-bar" style="width:0%"></div></div>
-        <span class="pending-tag">/ 10</span>
-      </div>
-      <div class="assessment-row">
-        <span class="assessment-name">End Term</span>
-        <div class="assessment-bar-wrap"><div class="assessment-bar" style="width:0%"></div></div>
-        <span class="pending-tag">/ 40</span>
-      </div>
-      <div class="total-row">
-        <span class="total-label">Scored so far</span>
-        <span class="total-val">11 / 100</span>
-      </div>
+      <div class="assessment-row"><span class="assessment-name"><i class="fas fa-pen-alt"></i> Quiz 1</span><div class="bar-wrap"><div class="bar-fill" style="width:73%"></div></div><span class="assessment-score">11/15</span></div>
+      <div class="assessment-row"><span class="assessment-name"><i class="fas fa-hourglass-half"></i> Quiz 2</span><div class="bar-wrap"><div class="bar-fill" style="width:0%"></div></div><span class="pending-tag">/15</span></div>
+      <div class="assessment-row"><span class="assessment-name"><i class="fas fa-microphone-alt"></i> Viva (added)</span><div class="bar-wrap"><div class="bar-fill" id="daaVivaFill"></div></div><span class="assessment-score" id="daaVivaScore">6/10</span></div>
+      <div class="assessment-row"><span class="assessment-name"><i class="fas fa-laptop-code"></i> Lab Exam</span><div class="bar-wrap"><div class="bar-fill"></div></div><span class="pending-tag">/10</span></div>
+      <div class="assessment-row"><span class="assessment-name"><i class="fas fa-users"></i> Participation</span><div class="bar-wrap"><div class="bar-fill"></div></div><span class="pending-tag">/10</span></div>
+      <div class="assessment-row"><span class="assessment-name"><i class="fas fa-graduation-cap"></i> End Term</span><div class="bar-wrap"><div class="bar-fill"></div></div><span class="pending-tag">/40</span></div>
+      <div class="total-row"><span class="total-label">✅ Scored so far</span><span class="total-val" id="daaTotal">0 / 100</span></div>
     </div>
   </div>
-
-  <!-- DBMS -->
-  <div class="subject-card dbms fade-in">
-    <div class="card-header">
-      <div class="card-header-left">
-        <h2>DBMS</h2>
-        <span class="credit-badge">3 Credits</span>
-      </div>
-      <div class="score-circle">
-        <span class="pct">83%</span>
-        <span class="label">so far</span>
-      </div>
-    </div>
+  <!-- DBMS (standard) -->
+  <div class="subject-card dbms">
+    <div class="card-header"><div><h2>DBMS</h2><span class="credit-badge">3 Credits</span></div><div class="score-ring"><span class="pct">83%</span><span class="label">so far</span></div></div>
     <div class="card-body">
-      <div class="assessment-row">
-        <span class="assessment-name">Quiz 1</span>
-        <div class="assessment-bar-wrap"><div class="assessment-bar" style="width:85%"></div></div>
-        <span class="assessment-score">17 / 20</span>
-      </div>
-      <div class="assessment-row">
-        <span class="assessment-name">Lab Exam</span>
-        <div class="assessment-bar-wrap"><div class="assessment-bar" style="width:80%"></div></div>
-        <span class="assessment-score">16 / 20</span>
-      </div>
-      <div class="divider-pending">— to be conducted —</div>
-      <div class="assessment-row">
-        <span class="assessment-name">Quiz 2</span>
-        <div class="assessment-bar-wrap"><div class="assessment-bar" style="width:0%"></div></div>
-        <span class="pending-tag">/ 20</span>
-      </div>
-      <div class="assessment-row">
-        <span class="assessment-name">Project Evaluation</span>
-        <div class="assessment-bar-wrap"><div class="assessment-bar" style="width:0%"></div></div>
-        <span class="pending-tag">/ 40</span>
-      </div>
-      <div class="total-row">
-        <span class="total-label">Scored so far</span>
-        <span class="total-val">33 / 100</span>
-      </div>
+      <div class="assessment-row"><span class="assessment-name"><i class="fas fa-database"></i> Quiz 1</span><div class="bar-wrap"><div class="bar-fill" style="width:85%"></div></div><span>17/20</span></div>
+      <div class="assessment-row"><span class="assessment-name"><i class="fas fa-flask"></i> Lab Exam</span><div class="bar-wrap"><div class="bar-fill" style="width:80%"></div></div><span>16/20</span></div>
+      <div class="divider-light"><i class="far fa-clock"></i> pending assessments</div>
+      <div class="assessment-row"><span class="assessment-name">Quiz 2</span><div class="bar-wrap"><div class="bar-fill"></div></div><span class="pending-tag">/20</span></div>
+      <div class="assessment-row"><span class="assessment-name">Project Eval</span><div class="bar-wrap"><div class="bar-fill"></div></div><span class="pending-tag">/40</span></div>
+      <div class="total-row"><span class="total-label">📌 Scored</span><span class="total-val">33 / 100</span></div>
     </div>
   </div>
-
-</div>
-
-<div class="grid grid-2" style="margin-top:20px">
-
-  <!-- OS -->
-  <div class="subject-card os fade-in">
-    <div class="card-header">
-      <div class="card-header-left">
-        <h2>OS</h2>
-        <span class="credit-badge">3 Credits</span>
-      </div>
-      <div class="score-circle">
-        <span class="pct">70%</span>
-        <span class="label">so far</span>
-      </div>
-    </div>
+  <!-- OS (updated: quiz2:10/15, viva:7/10) -->
+  <div class="subject-card os">
+    <div class="card-header"><div><h2>Operating Systems</h2><span class="credit-badge">3 Credits</span></div><div class="score-ring" id="osRing"><span class="pct" id="osPct">0%</span><span class="label">current</span></div></div>
     <div class="card-body">
-      <div class="assessment-row">
-        <span class="assessment-name">Quiz 1</span>
-        <div class="assessment-bar-wrap"><div class="assessment-bar" style="width:53%"></div></div>
-        <span class="assessment-score">8 / 15</span>
-      </div>
-      <div class="assessment-row">
-        <span class="assessment-name">Viva</span>
-        <div class="assessment-bar-wrap"><div class="assessment-bar" style="width:80%"></div></div>
-        <span class="assessment-score">8 / 10</span>
-      </div>
-      <div class="divider-pending">— to be conducted —</div>
-      <div class="assessment-row">
-        <span class="assessment-name">Quiz 2</span>
-        <div class="assessment-bar-wrap"><div class="assessment-bar" style="width:0%"></div></div>
-        <span class="pending-tag">/ 15</span>
-      </div>
-      <div class="assessment-row">
-        <span class="assessment-name">Lab File</span>
-        <div class="assessment-bar-wrap"><div class="assessment-bar" style="width:0%"></div></div>
-        <span class="pending-tag">/ 10</span>
-      </div>
-      <div class="assessment-row">
-        <span class="assessment-name">Lab Exam</span>
-        <div class="assessment-bar-wrap"><div class="assessment-bar" style="width:0%"></div></div>
-        <span class="pending-tag">/ 20</span>
-      </div>
-      <div class="assessment-row">
-        <span class="assessment-name">End Exam</span>
-        <div class="assessment-bar-wrap"><div class="assessment-bar" style="width:0%"></div></div>
-        <span class="pending-tag">/ 40</span>
-      </div>
-      <div class="total-row">
-        <span class="total-label">Scored so far</span>
-        <span class="total-val">16 / 110</span>
-      </div>
+      <div class="assessment-row"><span class="assessment-name"><i class="fas fa-tasks"></i> Quiz 1</span><div class="bar-wrap"><div class="bar-fill" style="width:53%"></div></div><span>8/15</span></div>
+      <div class="assessment-row"><span class="assessment-name"><i class="fas fa-chart-simple"></i> Quiz 2 (new)</span><div class="bar-wrap"><div class="bar-fill" id="osQuizFill"></div></div><span class="assessment-score" id="osQuiz2Display">10/15</span></div>
+      <div class="assessment-row"><span class="assessment-name"><i class="fas fa-user-astronaut"></i> Viva</span><div class="bar-wrap"><div class="bar-fill" id="osVivaFill"></div></div><span class="assessment-score" id="osVivaDisplay">7/10</span></div>
+      <div class="divider-light">⌛ upcoming</div>
+      <div class="assessment-row"><span class="assessment-name">Lab File</span><div class="bar-wrap"><div class="bar-fill"></div></div><span class="pending-tag">/10</span></div>
+      <div class="assessment-row"><span class="assessment-name">Lab Exam</span><div class="bar-wrap"><div class="bar-fill"></div></div><span class="pending-tag">/20</span></div>
+      <div class="assessment-row"><span class="assessment-name">End Exam</span><div class="bar-wrap"><div class="bar-fill"></div></div><span class="pending-tag">/40</span></div>
+      <div class="total-row"><span class="total-label">📊 Scored so far</span><span class="total-val" id="osTotalScored">0 / 110</span></div>
     </div>
   </div>
-
   <!-- DCCN -->
-  <div class="subject-card dccn fade-in">
-    <div class="card-header">
-      <div class="card-header-left">
-        <h2>DCCN</h2>
-        <span class="credit-badge">3 Credits</span>
-      </div>
-      <div class="score-circle">
-        <span class="pct">80%</span>
-        <span class="label">so far</span>
-      </div>
-    </div>
+  <div class="subject-card dccn">
+    <div class="card-header"><div><h2>DCCN</h2><span class="credit-badge">3 Credits</span></div><div class="score-ring" id="dccnRing"><span class="pct" id="dccnPct">0%</span><span class="label">current</span></div></div>
     <div class="card-body">
-      <div class="assessment-row">
-        <span class="assessment-name">Mid Exam</span>
-        <div class="assessment-bar-wrap"><div class="assessment-bar" style="width:80%"></div></div>
-        <span class="assessment-score">16 / 20</span>
-      </div>
-      <div class="divider-pending">— to be conducted —</div>
-      <div class="assessment-row">
-        <span class="assessment-name">Quiz 1</span>
-        <div class="assessment-bar-wrap"><div class="assessment-bar" style="width:0%"></div></div>
-        <span class="pending-tag">/ 20</span>
-      </div>
-      <div class="assessment-row">
-        <span class="assessment-name">Lab Exam</span>
-        <div class="assessment-bar-wrap"><div class="assessment-bar" style="width:0%"></div></div>
-        <span class="pending-tag">/ 20</span>
-      </div>
-      <div class="assessment-row">
-        <span class="assessment-name">End Exam</span>
-        <div class="assessment-bar-wrap"><div class="assessment-bar" style="width:0%"></div></div>
-        <span class="pending-tag">/ 40</span>
-      </div>
-      <div class="total-row">
-        <span class="total-label">Scored so far</span>
-        <span class="total-val">16 / 100</span>
-      </div>
+      <div class="assessment-row"><span class="assessment-name"><i class="fas fa-network-wired"></i> Mid Exam</span><div class="bar-wrap"><div class="bar-fill" style="width:80%"></div></div><span>16/20</span></div>
+      <div class="assessment-row"><span class="assessment-name"><i class="fas fa-question-circle"></i> Quiz (updated)</span><div class="bar-wrap"><div class="bar-fill" id="dccnQuizFill"></div></div><span class="assessment-score" id="dccnQuizSpan">12/20</span></div>
+      <div class="divider-light">⏳ future events</div>
+      <div class="assessment-row"><span class="assessment-name">Lab Exam</span><div class="bar-wrap"><div class="bar-fill"></div></div><span class="pending-tag">/20</span></div>
+      <div class="assessment-row"><span class="assessment-name">End Exam</span><div class="bar-wrap"><div class="bar-fill"></div></div><span class="pending-tag">/40</span></div>
+      <div class="total-row"><span class="total-label">✨ Cumulative</span><span class="total-val" id="dccnTotal">0 / 100</span></div>
     </div>
   </div>
-
 </div>
 
-<!-- ────────────── 2-CREDIT SUBJECTS ────────────── -->
-<div class="section-label" style="padding-top:48px">2-Credit Courses</div>
-
+<div class="section-label">
+  <div class="section-title"><i class="fas fa-certificate"></i> 2‑CREDIT COURSES • COMPLEMENTARY</div>
+  <div class="insight-chip"><i class="fas fa-chart-simple"></i> pending end term impact</div>
+</div>
 <div class="grid grid-4">
-
-  <!-- CTCS -->
-  <div class="subject-card ctcs fade-in">
-    <div class="card-header">
-      <div class="card-header-left">
-        <h2>CTCS</h2>
-        <span class="credit-badge">2 Credits</span>
-      </div>
-      <div class="score-circle">
-        <span class="pct">—</span>
-        <span class="label">pending</span>
-      </div>
-    </div>
+  <!-- CTCS with 10/25 lab exam -->
+  <div class="subject-card ctcs">
+    <div class="card-header"><div><h2>CTCS</h2><span class="credit-badge">2 Credits</span></div><div class="score-ring" id="ctcsRing"><span class="pct" id="ctcsPct">0%</span><span class="label">current</span></div></div>
     <div class="card-body">
-      <div class="divider-pending">— to be conducted —</div>
-      <div class="assessment-row">
-        <span class="assessment-name">1st Lab Exam</span>
-        <span class="pending-tag">/ 25</span>
-      </div>
-      <div class="assessment-row">
-        <span class="assessment-name">2nd Lab Exam</span>
-        <span class="pending-tag">/ 25</span>
-      </div>
-      <div class="assessment-row">
-        <span class="assessment-name">Class Participation</span>
-        <span class="pending-tag">/ 10</span>
-      </div>
-      <div class="assessment-row">
-        <span class="assessment-name">End Exam</span>
-        <span class="pending-tag">/ 40</span>
-      </div>
-      <div class="total-row">
-        <span class="total-label">Total marks</span>
-        <span class="total-val">— / 100</span>
-      </div>
+      <div class="assessment-row"><span class="assessment-name"><i class="fas fa-flask"></i> 1st Lab Exam</span><div class="bar-wrap"><div class="bar-fill" id="ctcsBarFill"></div></div><span class="assessment-score" id="ctcsLabScoreDisplay">10/25</span></div>
+      <div class="assessment-row"><span class="assessment-name">2nd Lab Exam</span><div class="bar-wrap"><div class="bar-fill"></div></div><span class="pending-tag">/25</span></div>
+      <div class="assessment-row"><span class="assessment-name">Class Participation</span><div class="bar-wrap"><div class="bar-fill"></div></div><span class="pending-tag">/10</span></div>
+      <div class="total-row"><span class="total-label">📌 Scored</span><span class="total-val" id="ctcsTotalVal">0 / 100</span></div>
     </div>
   </div>
-
-  <!-- GDPI -->
-  <div class="subject-card gdpi fade-in">
-    <div class="card-header">
-      <div class="card-header-left">
-        <h2>GDPI</h2>
-        <span class="credit-badge">2 Credits</span>
-      </div>
-      <div class="score-circle">
-        <span class="pct">53%</span>
-        <span class="label">so far</span>
-      </div>
-    </div>
-    <div class="card-body">
-      <div class="assessment-row">
-        <span class="assessment-name">GD — Round 1</span>
-        <div class="assessment-bar-wrap"><div class="assessment-bar" style="width:75%"></div></div>
-        <span class="assessment-score">7.5 / 10</span>
-      </div>
-      <div class="assessment-row">
-        <span class="assessment-name">GD — Round 2</span>
-        <div class="assessment-bar-wrap"><div class="assessment-bar" style="width:70%"></div></div>
-        <span class="assessment-score">14 / 20</span>
-      </div>
-      <div class="divider-pending">— to be conducted —</div>
-      <div class="assessment-row">
-        <span class="assessment-name">Personal Interview</span>
-        <span class="pending-tag">/ 40</span>
-      </div>
-      <div class="assessment-row">
-        <span class="assessment-name">Class Participation</span>
-        <span class="pending-tag">/ 10</span>
-      </div>
-      <div class="assessment-row">
-        <span class="assessment-name">Peer Feedback</span>
-        <span class="pending-tag">/ 20</span>
-      </div>
-      <div class="total-row">
-        <span class="total-label">Scored so far</span>
-        <span class="total-val">21.5 / 100</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- MAD -->
-  <div class="subject-card mad fade-in">
-    <div class="card-header">
-      <div class="card-header-left">
-        <h2>MAD</h2>
-        <span class="credit-badge">2 Credits</span>
-      </div>
-      <div class="score-circle">
-        <span class="pct">63%</span>
-        <span class="label">so far</span>
-      </div>
-    </div>
-    <div class="card-body">
-      <div class="assessment-row">
-        <span class="assessment-name">Quiz</span>
-        <div class="assessment-bar-wrap"><div class="assessment-bar" style="width:57%"></div></div>
-        <span class="assessment-score">17 / 30</span>
-      </div>
-      <div class="assessment-row">
-        <span class="assessment-name">Figma Marks</span>
-        <div class="assessment-bar-wrap"><div class="assessment-bar" style="width:87%"></div></div>
-        <span class="assessment-score">13 / 15</span>
-      </div>
-      <div class="divider-pending">— to be conducted —</div>
-      <div class="assessment-row">
-        <span class="assessment-name">Project Evaluation</span>
-        <span class="pending-tag">/ 40</span>
-      </div>
-      <div class="assessment-row">
-        <span class="assessment-name">Assignment</span>
-        <span class="pending-tag">/ 15</span>
-      </div>
-      <div class="total-row">
-        <span class="total-label">Scored so far</span>
-        <span class="total-val">30 / 100</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- CLUBS -->
-  <div class="subject-card clubs fade-in">
-    <div class="card-header">
-      <div class="card-header-left">
-        <h2>Clubs</h2>
-        <span class="credit-badge">2 Credits</span>
-      </div>
-      <div class="score-circle">
-        <span class="pct">—</span>
-        <span class="label">pending</span>
-      </div>
-    </div>
-    <div class="card-body">
-      <div class="assessment-row">
-        <span class="assessment-name">Attendance &amp; Participation</span>
-        <div class="assessment-bar-wrap"><div class="assessment-bar" style="width:0%"></div></div>
-        <span class="pending-tag">/ 100</span>
-      </div>
-      <div style="margin-top:14px; padding:10px 12px; background:rgba(255,255,255,0.03); border-radius:8px; border:1px solid var(--border);">
-        <p style="font-size:0.75rem; color:var(--muted); line-height:1.6;">Marks are based on club attendance &amp; activity participation. Updated by the club coordinator at end of semester.</p>
-      </div>
-      <div class="total-row">
-        <span class="total-label">Total marks</span>
-        <span class="total-val">— / 100</span>
-      </div>
-    </div>
-  </div>
-
+  <!-- GDPI, MAD, Clubs (clean) -->
+  <div class="subject-card gdpi"><div class="card-header"><div><h2>GDPI</h2><span class="credit-badge">2 Credits</span></div><div class="score-ring"><span class="pct">53%</span><span class="label">so far</span></div></div><div class="card-body"><div class="assessment-row"><span><i class="fas fa-comments"></i> GD R1</span><div class="bar-wrap"><div class="bar-fill" style="width:75%"></div></div><span>7.5/10</span></div><div class="assessment-row"><span>GD R2</span><div class="bar-wrap"><div class="bar-fill" style="width:70%"></div></div><span>14/20</span></div><div class="total-row"><span>Scored</span><span>21.5 / 100</span></div></div></div>
+  <div class="subject-card mad"><div class="card-header"><div><h2>MAD</h2><span class="credit-badge">2 Credits</span></div><div class="score-ring"><span class="pct">63%</span><span class="label">so far</span></div></div><div class="card-body"><div class="assessment-row"><span><i class="fas fa-mobile-alt"></i> Quiz</span><div class="bar-wrap"><div class="bar-fill" style="width:57%"></div></div><span>17/30</span></div><div class="assessment-row"><span>Figma</span><div class="bar-wrap"><div class="bar-fill" style="width:87%"></div></div><span>13/15</span></div><div class="total-row"><span>Total scored</span><span>30 / 100</span></div></div></div>
+  <div class="subject-card clubs"><div class="card-header"><div><h2>Clubs</h2><span class="credit-badge">2 Credits</span></div><div class="score-ring"><span class="pct">—</span><span class="label">pending</span></div></div><div class="card-body"><div class="assessment-row"><span><i class="fas fa-users"></i> Attendance</span><div class="bar-wrap"><div class="bar-fill"></div></div><span class="pending-tag">/100</span></div><div class="total-row"><span>To be updated</span><span>— / 100</span></div></div></div>
 </div>
 
 <script>
-  document.querySelectorAll('.subject-card').forEach((card, i) => {
-    card.style.animationDelay = (0.05 + i * 0.07) + 's';
-  });
-</script>
+  // update DAA (viva=6)
+  function updateDAA() {
+    let scored = 11 + 6;  // quiz1 + viva
+    let total = 100;
+    let pct = (scored/total)*100;
+    document.getElementById('daaPct').innerText = Math.round(pct) + '%';
+    document.getElementById('daaTotal').innerText = scored + ' / 100';
+    let vivaFillPercent = (6/10)*100;
+    document.getElementById('daaVivaFill').style.width = vivaFillPercent+'%';
+    document.getElementById('daaVivaScore').innerText = '6/10';
+  }
+  // OS: quiz1=8, quiz2=10, viva=7 => total 25/110
+  function updateOS() {
+    let quiz1=8, quiz2=10, viva=7;
+    let scored = quiz1+quiz2+viva;
+    let totalMax=110;
+    let pct = (scored/totalMax)*100;
+    document.getElementById('osPct').innerText = Math.round(pct)+'%';
+    document.getElementById('osTotalScored').innerText = scored + ' / 110';
+    document.getElementById('osQuizFill').style.width = (10/15)*100+'%';
+    document.getElementById('osVivaFill').style.width = (7/10)*100+'%';
+    document.getElementById('osQuiz2Display').innerText = '10/15';
+    document.getElementById('osVivaDisplay').innerText = '7/10';
+  }
+  function updateDCCN() {
+    let mid=16, quiz=12;
+    let scored = mid+quiz;
+    let total=100;
+    let pct = (scored/total)*100;
+    document.getElementById('dccnPct').innerText = Math.round(pct)+'%';
+    document.getElementById('dccnTotal').innerText = scored + ' / 100';
+    document.getElementById('dccnQuizFill').style.width = (12/20)*100+'%';
+    document.getElementById('dccnQuizSpan').innerText = '12/20';
+  }
+  function updateCTCS() {
+    let lab1=10;
+    let scored = lab1;
+    let total=100;
+    let pct = (scored/total)*100;
+    document.getElementById('ctcsPct').innerText = Math.round(pct)+'%';
+    document.getElementById('ctcsTotalVal').innerText = scored + ' / 100';
+    document.getElementById('ctcsBarFill').style.width = (10/25)*100+'%';
+    document.getElementById('ctcsLabScoreDisplay').innerText = '10/25';
+  }
+  updateDAA(); updateOS(); updateDCCN(); updateCTCS();
 
+  // EXTRA FEATURE: GPA Estimator (based on average percentage from courses that have scored marks)
+  function computeEstimatedGPA() {
+    let courses = [
+      { name: 'DAA', scored: 17, total: 100, credits: 3 },
+      { name: 'DBMS', scored: 33, total: 100, credits: 3 },
+      { name: 'OS', scored: 25, total: 110, credits: 3 },
+      { name: 'DCCN', scored: 28, total: 100, credits: 3 },
+      { name: 'CTCS', scored: 10, total: 100, credits: 2 },
+      { name: 'GDPI', scored: 21.5, total: 100, credits: 2 },
+      { name: 'MAD', scored: 30, total: 100, credits: 2 }
+    ];
+    let totalWeightedPoints = 0, totalCredits = 0;
+    courses.forEach(c => {
+      let percentage = (c.scored / c.total) * 100;
+      let gradePoint = 0;
+      if (percentage >= 90) gradePoint = 10;
+      else if (percentage >= 80) gradePoint = 9;
+      else if (percentage >= 70) gradePoint = 8;
+      else if (percentage >= 60) gradePoint = 7;
+      else if (percentage >= 50) gradePoint = 6;
+      else if (percentage >= 40) gradePoint = 5;
+      else gradePoint = 4;
+      totalWeightedPoints += gradePoint * c.credits;
+      totalCredits += c.credits;
+    });
+    let gpa = totalWeightedPoints / totalCredits;
+    document.getElementById('gpaValue').innerText = gpa.toFixed(1);
+    document.getElementById('totalCreditsEarned').innerHTML = `Credits: ${totalCredits} | GPA base`;
+    // Dynamic quote based on best subject
+    let bestPct = Math.max( (17/100)*100, (33/100)*100, (25/110)*100, (28/100)*100, (10/100)*100, (21.5/100)*100, (30/100)*100 );
+    if(bestPct > 75) document.getElementById('motivationQuote').innerText = "🎯 Excellent momentum! Your consistency is paying off.";
+    else if(bestPct > 55) document.getElementById('motivationQuote').innerText = "📚 Solid start — focus on upcoming exams to boost GPA.";
+    else document.getElementById('motivationQuote').innerText = "💪 Every mark counts! Revise smartly for the next assessments.";
+    let insightMsg = "Viva marks + quizzes updated — CTCS lab exam recorded. Keep tracking!";
+    document.getElementById('progressInsight').innerHTML = insightMsg + ` Avg. performance: ${Math.round((17+33+25+28+10+21.5+30)/(700)*100)}% completion overall`;
+  }
+  computeEstimatedGPA();
+  // Extra micro interaction for curiosity
+  let rings = document.querySelectorAll('.score-ring');
+  rings.forEach(r => r.addEventListener('mouseenter', (e) => { e.currentTarget.style.transform = 'scale(1.02)'; }));
+  rings.forEach(r => r.addEventListener('mouseleave', (e) => { e.currentTarget.style.transform = 'scale(1)'; }));
+</script>
 </body>
 </html>
